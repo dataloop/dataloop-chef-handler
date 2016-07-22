@@ -33,7 +33,7 @@ chef_handler 'Chef::Handler::Dataloop' do
    :api_token => node['dataloop_chef_handler']['api_token'],
    :org => node['dataloop_chef_handler']['org'],
    :account => node['dataloop_chef_handler']['account'],
-   :stream => noe['dataloop_chef_handler']['stream']
+   :stream => node['dataloop_chef_handler']['stream']
   ]
   action :nothing
 end.run_action(:enable)
