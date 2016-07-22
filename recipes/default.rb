@@ -36,5 +36,5 @@ chef_handler 'Chef::Handler::Dataloop' do
    :account => node['dataloop_chef_handler']['account'],
    :stream => node['dataloop_chef_handler']['stream']
   ]
-  action :nothing
-end.run_action(:enable)
+  action :enable
+end
