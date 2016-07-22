@@ -40,7 +40,7 @@ class Chef::Handler::Dataloop < Chef::Handler
       #   puts "#{metric} #{value}"
       # end
 
-      uri =  URI.parse("https://#{@host}/napi/v1/orgs/#{@org}/accounts/#{@account}/annotations/#{@stream}")
+      uri =  URI.parse("https://#{@host}/api/v1/orgs/#{@org}/accounts/#{@account}/annotations/#{@stream}")
       https = Net::HTTP.new(uri.host,uri.port)
       https.use_ssl = true
       req = Net::HTTP::Post.new(uri.path)
