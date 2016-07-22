@@ -28,7 +28,7 @@ cookbook_file "#{node["chef_handler"]["handler_path"]}/dataloop_annotations.rb" 
 end
 
 chef_handler 'Chef::Handler::Dataloop' do
-  source '/tmp/kitchen/handlers/dataloop_handler.rb'
+  source "#{node["chef_handler"]["handler_path"]}/dataloop_annotations.rb"
   arguments [
    :host => node['dataloop_chef_handler']['host'],
    :api_token => node['dataloop_chef_handler']['api_token'],
