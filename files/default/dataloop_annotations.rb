@@ -29,16 +29,19 @@ class Chef::Handler::Dataloop < Chef::Handler
       if run_status.success?
           metrics[:success] = 1
           metrics[:fail] = 0
-          status_message = "success"
+          status_message = "success: "
       else
           metrics[:success] = 0
           metrics[:fail] = 1
-          status_message = "failed"
+          status_message = "failed: "
       end
 
       # metrics.each do |metric, value|
       #   puts "#{metric} #{value}"
       # end
+
+      status_message += "#{metrics[:updated_resources]}/#{metrics[:all_resources]} updated in #{metrics[:elapsed_time]} seconds"
+
 
       uri =  URI.parse("https://#{@host}/api/v1/orgs/#{@org}/accounts/#{@account}/annotations/#{@stream}")
       https = Net::HTTP.new(uri.host,uri.port)
@@ -49,6 +52,7 @@ class Chef::Handler::Dataloop < Chef::Handler
       req.body = '{"name": "'+run_status.node.name.to_s+'", "description": "'+status_message+'"}'
       begin
         response = https.request(req)
+        Chef::Log.info("annotation status: #{response.code}")
       # rescue StandardError => e
       rescue Errno::EINVAL, Errno::ECONNRESET, EOFError, Net::HTTPBadResponse, Net::HTTPHeaderSyntaxError, Net::ProtocolError => e
         Chef::Log.error("failed to annotate Dataloop @ '#{@host}' :- #{e}")
