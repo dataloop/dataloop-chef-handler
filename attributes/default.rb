@@ -1,3 +1,4 @@
+default['dataloop_chef_handler']['host']      = 'app.dataloop.io'
 default['dataloop_chef_handler']['api_token'] = ''
 default['dataloop_chef_handler']['org']       = ''
 default['dataloop_chef_handler']['account']   = 'default'

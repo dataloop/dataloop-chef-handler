@@ -30,6 +30,7 @@ end
 chef_handler 'Chef::Handler::Dataloop' do
   source '/tmp/kitchen/handlers/dataloop_handler.rb'
   arguments [
+   :host => node['dataloop_chef_handler']['host'],
    :api_token => node['dataloop_chef_handler']['api_token'],
    :org => node['dataloop_chef_handler']['org'],
    :account => node['dataloop_chef_handler']['account'],
